@@ -3,13 +3,18 @@ import threading
 import time
 import json
 import random
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Producer(threading.Thread):
     daemon = True
 
     def run(self):
-        local_server = "prdserver2:6667"
+
+        local_server = os.getenv("SKORUZ_KAFKA_SERVER")
         dev_server = "localhost:9092"
         producer = KafkaProducer(bootstrap_servers=[local_server],
                                  value_serializer=lambda v: json.dumps(v).encode('utf-8'))

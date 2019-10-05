@@ -26,6 +26,7 @@ def load_data():
         curs = conn.cursor()
         curs.execute('CREATE TABLE ' + filename + ' (str STRING) STORED AS ORC')
         curs.execute('INSERT INTO ' + filename + ' VALUES (\'' + datastore + '\')')
+        conn.close()
     except Exception:
         print("Error")
 

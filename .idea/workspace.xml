@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa9c609-f340-44fd-b935-23ab7a1d3f79" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_topic.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_topic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_import/data_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_import/data_import.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/humidity.json" beforeDir="false" afterPath="$PROJECT_DIR$/data_import/datafile/humidity.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/producer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +38,7 @@
       <recent name="F:\Internship\Skoruz\HDFS\kafka\py_script" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Internship\Skoruz\HDFS\kafka\py_script\data_import\datafile" />
       <recent name="F:\Internship\Skoruz\HDFS\kafka\py_script" />
       <recent name="F:\Internship\Skoruz\HDFS\kafka\py_script\data_import" />
     </key>
