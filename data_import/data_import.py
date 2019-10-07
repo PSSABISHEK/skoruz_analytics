@@ -21,8 +21,8 @@ def load_data():
     datastore = f.read()
     try:
         conn = jaydebeapi.connect("com.simba.hive.jdbc41.HS2Driver",
-                                  "jdbc:hive2://" + remote_server + ":" + server_port +
-                                  "/" + server_database, {'user': "hive", 'password': ""}, remote_filepath)
+                                  "jdbc:hive2://" + local_server + ":" + server_port +
+                                  "/" + server_database, {'user': "hive", 'password': ""}, local_filepath)
         curs = conn.cursor()
         curs.execute('CREATE TABLE ' + filename + ' (str STRING) STORED AS ORC')
         curs.execute('INSERT INTO ' + filename + ' VALUES (\'' + datastore + '\')')

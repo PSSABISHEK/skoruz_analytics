@@ -12,7 +12,7 @@ load_dotenv()
 def create_topic():
     local_server = os.getenv("SKORUZ_KAFKA_SERVER")
     remote_server = "localhost:9092"
-    admin_client = KafkaAdminClient(bootstrap_servers=local_server, client_id='test')
+    admin_client = KafkaAdminClient(bootstrap_servers=local_server, client_id='test.py')
     filename = sys.argv[1]
     filename = os.path.splitext(filename)[0]
     while True:
@@ -34,7 +34,7 @@ def create_table(table_name):
     server_port = os.getenv("SKORUZ_PORT")
     server_database = os.getenv("SKORUZ_DB")
 
-    data_dir = os.path.join(os.getcwd(), "data_import/datafile/" + sys.argv[1])
+    """data_dir = os.path.join(os.getcwd(), "data_import/datafile/" + sys.argv[1])
     f = open(data_dir, "r")
     datastore = json.load(f)
     values = []
@@ -48,12 +48,13 @@ def create_table(table_name):
         j += 1
     values = ",".join(values)
     values = values.replace(',', ' ')
-    values = values.replace(';', ',')
+    values = values.replace(';', ',')"""
     conn = jaydebeapi.connect("com.simba.hive.jdbc41.HS2Driver",
-                              "jdbc:hive2://" + remote_server + ":" + server_port +
-                              "/" + server_database, {'user': "hive", 'password': ""}, remote_filepath)
+                              "jdbc:hive2://" + local_server + ":" + server_port +
+                              "/" + server_database, {'user': "hive", 'password': ""}, local_filepath)
     curs = conn.cursor()
-    curs.execute('CREATE TABLE ' + table_name + '(' + values + ') STORED AS ORC')
+    # curs.execute('CREATE TABLE ' + table_name + '(' + values + ') STORED AS ORC')
+    curs.execute('CREATE TABLE ' + table_name + '( str STRING ) STORED AS ORC')
     conn.close()
 
 

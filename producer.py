@@ -13,7 +13,6 @@ class Producer(threading.Thread):
     daemon = True
 
     def run(self):
-
         local_server = os.getenv("SKORUZ_KAFKA_SERVER")
         dev_server = "localhost:9092"
         producer = KafkaProducer(bootstrap_servers=[local_server],
@@ -23,7 +22,9 @@ class Producer(threading.Thread):
         while True:
             t = time.localtime()
             current_time = time.strftime("%H:%M:%S", t)
-            log = producer.send('prod_L3', {"user_time": str(current_time), "alt": str(random.randrange(60, 100, 3))+percent})
+            log = producer.send('pord_L3',
+                                {"user_time": str(current_time), "humidity": str(random.randrange(60, 100, 3)) + percent
+                                    , "alt": str(random.randrange(60, 1000, 3)) + 'ft'})
             print(log)
             time.sleep(10)
 
