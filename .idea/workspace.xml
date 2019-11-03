@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa9c609-f340-44fd-b935-23ab7a1d3f79" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_topic.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_topic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_import/data_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_import/data_import.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_import/datafile/humidity.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/producer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_import/datafile/dev_J1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data_import/datafile/dev_J1.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +25,7 @@
   </component>
   <component name="ProjectId" id="1PUmJmWNEAtsCXYiId5NJGpd8tK" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="E:/Installations/Git/bin/git.exe" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
