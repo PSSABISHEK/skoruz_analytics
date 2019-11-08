@@ -5,6 +5,7 @@ import csv
 import jaydebeapi
 import shutil
 import random
+import time
 
 load_dotenv()
 
@@ -41,7 +42,8 @@ class DataFile:
             header = ",".join(header)
             header = header.replace(',', ' ')
             header = header.replace(';', ',')
-            self.create_table(file, filename, filetype, header, data_dir)
+            new_filename = self.create_table(file, filename, filetype, header, data_dir)
+            self.insertdata(data, new_filename)
 
         elif filetype == ".csv":
             with open(data_dir) as csvfile:
@@ -59,7 +61,8 @@ class DataFile:
             header = ",".join(header)
             header = header.replace(',', ' ')
             header = header.replace(';', ',')
-            self.create_table(file, filename, filetype, header, data_dir)
+            new_filename = self.create_table(file, filename, filetype, header, data_dir)
+            self.insertdata(data, new_filename)
 
         else:
             data_dir = os.path.join(os.getcwd(), "datafile/" + file)
@@ -92,9 +95,28 @@ class DataFile:
             shutil.copy(data_dir, new_path)
             os.rename(new_path, os.path.join(os.getcwd(), "movedfiles/" + new_filename + filetype))
             print("Table Name: ", new_filename)
+            return new_filename
 
         except Exception:
             print("Error")
+
+    def insertdata(self, data, tablename):
+        try:
+            data.pop(0)
+            conn = jaydebeapi.connect("com.simba.hive.jdbc41.HS2Driver",
+                                      "jdbc:hive2://" + self.local_server + ":" + self.server_port +
+                                      "/" + self.server_database, {'user': "hive", 'password': ""},
+                                      self.local_filepath)
+            for x in data:
+                x = ', '.join(['"{}"'.format(value) for value in x])  # List to string with double quotes for each tuple
+                curs = conn.cursor()
+                curs.execute('INSERT INTO ' + tablename + ' VALUES (' + x + ')')
+                t = time.localtime()
+                print("Inserted at : ", time.strftime("%H:%M:%S", t))
+            conn.close()
+
+        except Exception:
+            print("Insert error")
 
 
 d1 = DataFile()
