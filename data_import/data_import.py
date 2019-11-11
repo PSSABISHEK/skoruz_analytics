@@ -80,6 +80,7 @@ class DataFile:
 
             except Exception:
                 print("Error")
+                conn.close()
 
     def create_table(self, file, filename, filetype, header, data_dir):
         try:
@@ -99,6 +100,7 @@ class DataFile:
 
         except Exception:
             print("Error")
+            conn.close()
 
     def insertdata(self, data, tablename):
         try:
@@ -117,6 +119,7 @@ class DataFile:
 
         except Exception:
             print("Insert error")
+            conn.close()
 
 
 d1 = DataFile()
