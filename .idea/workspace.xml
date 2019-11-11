@@ -4,10 +4,6 @@
     <list default="true" id="2fa9c609-f340-44fd-b935-23ab7a1d3f79" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_topic.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_topic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_import/data_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_import/data_import.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_import/movedfiles/measurement_523.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_import/movedfiles/measurement_745.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/producer.py" beforeDir="false" afterPath="$PROJECT_DIR$/producer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

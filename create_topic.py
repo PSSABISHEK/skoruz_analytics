@@ -33,12 +33,32 @@ def create_table(table_name):
     remote_server = os.getenv("SKORUZ_WEBSITE")
     server_port = os.getenv("SKORUZ_PORT")
     server_database = os.getenv("SKORUZ_DB")
-    conn = jaydebeapi.connect("com.simba.hive.jdbc41.HS2Driver",
-                              "jdbc:hive2://" + local_server + ":" + server_port +
-                              "/" + server_database, {'user': "hive", 'password': ""}, local_filepath)
-    curs = conn.cursor()
-    curs.execute('CREATE TABLE ' + table_name + '( str STRING ) STORED AS ORC')
-    conn.close()
+    data_dir = os.path.join(os.getcwd(), "sampledata/" + sys.argv[1])
+    f = open(data_dir, "r")
+    data = json.load(f)
+    f.close()
+    header = []
+    length = len(data)
+    j = 0
+    for i in data:
+        header.append(i)
+        header.append('STRING')
+        if j < length - 1:
+            header.append(";")
+        j += 1
+    header = ",".join(header)
+    header = header.replace(',', ' ')
+    header = header.replace(';', ',')
+    try:
+        conn = jaydebeapi.connect("com.simba.hive.jdbc41.HS2Driver",
+                                  "jdbc:hive2://" + local_server + ":" + server_port +
+                                  "/" + server_database, {'user': "hive", 'password': ""}, local_filepath)
+        curs = conn.cursor()
+        curs.execute('CREATE TABLE ' + table_name + '(' + header + ') STORED AS ORC')
+        conn.close()
+    except Exception:
+        print("Error")
+        conn.close()
 
 
 print(create_topic())
