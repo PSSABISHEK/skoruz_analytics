@@ -33,15 +33,26 @@ class DataFile:
                     data.append(row)
             length = len(data[0])
             j = 0
-            for i in data[0]:
-                header.append(i)
-                header.append('STRING')
-                if j < length - 1:
-                    header.append(";")
-                j += 1
-            header = ",".join(header)
-            header = header.replace(',', ' ')
-            header = header.replace(';', ',')
+            if sys.argv[2] == 'Y' or sys.argv[2] == 'y':
+                for i in data[0]:
+                    header.append(i)
+                    header.append('STRING')
+                    if j < length - 1:
+                        header.append(";")
+                    j += 1
+                header = ",".join(header)
+                header = header.replace(',', ' ')
+                header = header.replace(';', ',')
+            else:
+                for i in range(length):
+                    header.append('column' + str(i))
+                    header.append('STRING')
+                    if j < length - 1:
+                        header.append(";")
+                    j += 1
+                header = ",".join(header)
+                header = header.replace(',', ' ')
+                header = header.replace(';', ',')
             new_filename = self.create_table(file, filename, filetype, header, data_dir)
             self.insertdata(data, new_filename)
 
@@ -52,19 +63,32 @@ class DataFile:
                     data.append(row)
             length = len(data[0])
             j = 0
-            for i in data[0]:
-                header.append(i)
-                header.append('STRING')
-                if j < length - 1:
-                    header.append(";")
-                j += 1
-            header = ",".join(header)
-            header = header.replace(',', ' ')
-            header = header.replace(';', ',')
+            if sys.argv[2] == 'Y' or sys.argv[2] == 'y':
+                for i in data[0]:
+                    header.append(i)
+                    header.append('STRING')
+                    if j < length - 1:
+                        header.append(";")
+                    j += 1
+                header = ",".join(header)
+                header = header.replace(',', ' ')
+                header = header.replace(';', ',')
+                data.pop(0)
+            else:
+                for i in range(length):
+                    header.append('column' + str(i))
+                    header.append('STRING')
+                    if j < length - 1:
+                        header.append(";")
+                    j += 1
+                header = ",".join(header)
+                header = header.replace(',', ' ')
+                header = header.replace(';', ',')
             new_filename = self.create_table(file, filename, filetype, header, data_dir)
             self.insertdata(data, new_filename)
 
         else:
+            filename = filename + "_" + str(random.randrange(1, 1000, 3))
             data_dir = os.path.join(os.getcwd(), "datafile/" + file)
             f = open(data_dir, "r")
             datastore = f.read()
@@ -77,6 +101,7 @@ class DataFile:
                 curs.execute('CREATE TABLE ' + filename + ' (str STRING) STORED AS ORC')
                 curs.execute('INSERT INTO ' + filename + ' VALUES (\'' + datastore + '\')')
                 conn.close()
+                print("Table Name : "+filename)
 
             except Exception:
                 print("Error")
@@ -92,9 +117,10 @@ class DataFile:
             new_filename = filename + "_" + str(random.randrange(1, 1000, 3))
             curs.execute('CREATE TABLE ' + new_filename + '(' + header + ') STORED AS ORC')
             conn.close()
-            new_path = os.path.join(os.getcwd(), "movedfiles/" + file)
+            # UNCOMMENT TO MOVE THE FILE TO NEW DIRECTORY FOR NIFI
+            """new_path = os.path.join(os.getcwd(), "movedfiles/" + file)
             shutil.copy(data_dir, new_path)
-            os.rename(new_path, os.path.join(os.getcwd(), "movedfiles/" + new_filename + filetype))
+            os.rename(new_path, os.path.join(os.getcwd(), "movedfiles/" + new_filename + filetype))"""
             print("Table Name: ", new_filename)
             return new_filename
 
@@ -104,7 +130,6 @@ class DataFile:
 
     def insertdata(self, data, tablename):
         try:
-            data.pop(0)
             conn = jaydebeapi.connect("com.simba.hive.jdbc41.HS2Driver",
                                       "jdbc:hive2://" + self.local_server + ":" + self.server_port +
                                       "/" + self.server_database, {'user': "hive", 'password': ""},
