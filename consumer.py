@@ -1,5 +1,5 @@
 from kafka import KafkaConsumer
-from json import loads
+from json import load, loads
 from dotenv import load_dotenv
 import sys
 import os
@@ -33,8 +33,12 @@ def run_consumer():
         value_deserializer=lambda x: loads(x.decode('utf-8')))
     for message in consumer:
         message = message.value
+        values = []
+        for i in message:
+            values.append(message[i])
+        values = ', '.join(['"{}"'.format(value) for value in values])
         try:
-            curs.execute('INSERT INTO ' + topic_name + ' VALUES (\"' + str(message) + '\")')
+            curs.execute('INSERT INTO ' + topic_name + ' VALUES (' + values + ')')
             print("Intserted : ", message)
         except Exception:
             print("Insert Error")
